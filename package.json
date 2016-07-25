@@ -1,0 +1,20 @@
+{
+  "name": "morse-distress-cli",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul --include-all-sources cover _mocha --dir .coverage -- -R spec",
+    "test:ci": "istanbul --include-all-sources cover _mocha --dir .coverage --report lcovonly -- -R spec && cat ./.coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./.coverage"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.11",
+    "istanbul": "^0.4.4",
+    "mocha": "^2.5.3",
+    "mocha-istanbul": "^0.3.0",
+    "mocha-lcov-reporter": "^1.2.0"
+  },
+  "author": "Jon Lauridsen",
+  "license": "MIT"
+}
