@@ -4,6 +4,8 @@
 
 Military-grade cryptologic CLI to commnicate securly with your homebase. [It even works off-world](https://gist.github.com/kmckelvin/41a4a69e397b510274373aa241698561)!
 
+![Example](simple-morse.gif)
+
 ```
 $ bin/morse --help
 Usage: bin/morse [text] [options]
