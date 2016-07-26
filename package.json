@@ -3,9 +3,17 @@
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "morse": "./bin/morse"
+  },
   "scripts": {
-    "test": "istanbul --include-all-sources cover _mocha --dir .coverage -- -R spec",
+    "test": "mocha",
+    "test:cov": "istanbul --include-all-sources cover _mocha --dir .coverage -- -R spec",
     "test:ci": "istanbul --include-all-sources cover _mocha --dir .coverage --report lcovonly -- -R spec && cat ./.coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./.coverage"
+  },
+  "dependencies": {
+    "lodash": "^4.14.0",
+    "yargs": "^4.8.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
@@ -13,7 +21,12 @@
     "istanbul": "^0.4.4",
     "mocha": "^2.5.3",
     "mocha-istanbul": "^0.3.0",
-    "mocha-lcov-reporter": "^1.2.0"
+    "mocha-lcov-reporter": "^1.2.0",
+    "mock-fs": "^3.11.0",
+    "mockery": "^1.7.0",
+    "rewire": "^2.5.2",
+    "sinon": "^1.17.4",
+    "sinon-chai": "^2.8.0"
   },
   "author": "Jon Lauridsen",
   "license": "MIT"
