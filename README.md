@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/gaggle/morse-distress-cli.svg?branch=master)](https://travis-ci.org/gaggle/morse-distress-cli)
 [![Coverage Status](https://coveralls.io/repos/github/gaggle/morse-distress-cli/badge.svg?branch=master)](https://coveralls.io/github/gaggle/morse-distress-cli?branch=master)
 
-Military-grade cryptologic CLI to commnicate securly with your homebase. It even works off-world!
+Military-grade cryptologic CLI to commnicate securly with your homebase. [It even works off-world](https://gist.github.com/kmckelvin/41a4a69e397b510274373aa241698561)!
 
 ```
 $ bin/morse --help
