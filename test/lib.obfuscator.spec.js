@@ -1,5 +1,5 @@
-var expect = require("chai").expect
-var obfuscator = require("../lib/obfuscator")
+const expect = require("chai").expect
+const obfuscator = require("../lib/obfuscator")
 
 describe("obfuscator", function () {
   it("replaces a dot with 1", function () {

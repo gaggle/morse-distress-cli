@@ -1,8 +1,8 @@
 "use strict";
-var fs = require("fs")
-var _ = require("lodash")
-var morseify = require("./lib/morseify")
-var obfuscator = require("./lib/obfuscator")
+const fs = require("fs")
+const _ = require("lodash")
+const morseify = require("./lib/morseify")
+const obfuscator = require("./lib/obfuscator")
 
 exports.process_argv = function (argv) {
   var msg = argv._.join(" ") || fs.readFileSync(argv.file, "utf8")

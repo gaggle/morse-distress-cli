@@ -1,5 +1,5 @@
-var expect = require("chai").expect
-var index = require("../index")
+const expect = require("chai").expect
+const index = require("../index")
 
 describe("integration testing", function () {
  it("translates to morse as expected", function () {

@@ -1,13 +1,13 @@
 "use strict";
-var chai = require("chai")
-var fs = require("fs")
-var _ = require("lodash")
-var mock_fs = require("mock-fs")
-var mockery = require("mockery")
-var rewire = require("rewire")
-var sinon = require("sinon")
-var sinonChai = require("sinon-chai")
-var expect = chai.expect
+const chai = require("chai")
+const fs = require("fs")
+const _ = require("lodash")
+const mock_fs = require("mock-fs")
+const mockery = require("mockery")
+const rewire = require("rewire")
+const sinon = require("sinon")
+const sinonChai = require("sinon-chai")
+const expect = chai.expect
 chai.use(sinonChai)
 
 describe("index", function () {

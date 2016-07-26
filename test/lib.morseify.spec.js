@@ -1,6 +1,6 @@
-var expect = require("chai").expect
-var _ = require("lodash")
-var morseify = require("../lib/morseify")
+const expect = require("chai").expect
+const _ = require("lodash")
+const morseify = require("../lib/morseify")
 
 describe("morseify", function () {
   _.forEach({
