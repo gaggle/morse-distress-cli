@@ -15,7 +15,7 @@ exports.process_argv = function (argv) {
   }
 }
 
-const DEFAULT_OPTS = {obfuscate: false, seperators: {char: "|", word: "/"}}
+const DEFAULT_OPTS = {obfuscate: false, separators: {char: "|", word: "/"}}
 exports.convert_text = function (message, opts) {
   opts = _.merge({}, DEFAULT_OPTS, opts)
   var morsed = morseify(message)
@@ -25,15 +25,15 @@ exports.convert_text = function (message, opts) {
     if (result.length == 0)
       result.push(value)
     else if (value == " ")
-      result.push(opts.seperators.word)
-    else if (_.last(result) == opts.seperators.word)
+      result.push(opts.separators.word)
+    else if (_.last(result) == opts.separators.word)
       result.push(value)
     else if (value == "\n")
       result.push(value)
     else if (_.last(result) == "\n")
       result.push(value)
     else
-      result.push(opts.seperators.char, value)
+      result.push(opts.separators.char, value)
     return result
   }, []).join("")
 }
