@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+var main = require("../index")
+
+var argv = require("yargs")
+  .usage("Usage: $0 [text] [options]")
+  .example("$0 Laying an egg")
+  .example("$0 -f secrets.txt --obfuscate")
+
+  .option("file", {
+    alias: ["f", "i", "input"],
+    default: null,
+    describe: "Path to file containing text",
+    type: "path"
+  })
+
+  .option("obfuscate", {
+    alias: ["o", "garble"],
+    default: false,
+    describe: "Also obfuscate the text",
+    type: "bool"
+  })
+
+  .option("write", {
+    alias: "w",
+    default: null,
+    describe: "Path to where output will be written",
+    type: "path"
+  })
+
+  .help("h")
+  .alias("h", "help")
+  .strict()
+  .check(function (parsed, options) {
+    if (!parsed._.length && !parsed.file)
+      return "Must specify either non-argument text or use the --file option"
+    if(parsed._.length && parsed.file)
+      return "Cannot specify both non-argument text and file option"
+    return true
+  })
+  .argv
+
+main.process_argv(argv)
