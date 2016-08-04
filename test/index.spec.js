@@ -44,7 +44,7 @@ describe("index", () => {
       expect(obfuscator).to.have.been.calledWith(["...."])
     })
 
-    it("inserts pipe separator betwen letters by default", () => {
+    it("inserts pipe separator between letters by default", () => {
       morseify.returns(["....", "...."])
       const res = index.convertText()
       expect(res).to.eql("....|....")
