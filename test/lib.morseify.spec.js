@@ -1,3 +1,4 @@
+"use strict";
 const expect = require("chai").expect
 const _ = require("lodash")
 const morseify = require("../lib/morseify")

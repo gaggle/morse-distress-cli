@@ -1,3 +1,4 @@
+"use strict";
 const expect = require("chai").expect
 const obfuscator = require("../lib/obfuscator")
 
