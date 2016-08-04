@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-var main = require("../index")
+const main = require("../index")
 
-var argv = require("yargs")
+const argv = require("yargs")
   .usage("Usage: $0 [text] [options]")
   .example("$0 Laying an egg")
   .example("$0 -f secrets.txt --obfuscate")

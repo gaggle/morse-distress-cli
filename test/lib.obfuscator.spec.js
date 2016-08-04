@@ -8,7 +8,7 @@ describe("obfuscator", function () {
   })
 
   it("replaces dots with numbers", function () {
-    var H = ["...."]
+    const H = ["...."]
     expect(obfuscator(H))
       .to.eql(["4"])
   })
@@ -19,13 +19,13 @@ describe("obfuscator", function () {
   })
 
   it("replaces dashes with letter in the alphabet", function () {
-    var O = ["---"]
+    const O = ["---"]
     expect(obfuscator(O))
       .to.eql(["C"])
   })
 
   it("replaces all groups in one morse letter", function () {
-    var B = ["-."]
+    const B = ["-."]
     expect(obfuscator(B))
       .to.eql(["A1"])
   })

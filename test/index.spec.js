@@ -11,7 +11,7 @@ const expect = chai.expect
 chai.use(sinonChai)
 
 describe("index", function () {
-  var sandbox
+  let sandbox
 
   beforeEach(function () {
     sandbox = sinon.sandbox.create()
@@ -24,7 +24,7 @@ describe("index", function () {
   })
 
   describe("#convert_text", function () {
-    var index, morseify, obfuscator
+    let index, morseify, obfuscator
 
     beforeEach(function () {
       morseify = sandbox.stub()
@@ -47,19 +47,19 @@ describe("index", function () {
 
     it("inserts pipe separator betwen letters by default", function() {
       morseify.returns(["....", "...."])
-      var res = index.convertText()
+      const res = index.convertText()
       expect(res).to.eql("....|....")
     })
 
     it("replaces spaces between words with forward slash by default", function() {
       morseify.returns(["....", " ", "...."])
-      var res = index.convertText()
+      const res = index.convertText()
       expect(res).to.eql("..../....")
     })
   })
 
   describe("#process_argv", function () {
-   var index, convertText, logger
+   let index, convertText, logger
 
    beforeEach(function () {
      index = rewire("../index")
@@ -102,7 +102,7 @@ describe("index", function () {
   })
 })
 
-var with_args = function (opts) {
+const with_args = function (opts) {
  return _.merge({
    _: [],
    file: null,

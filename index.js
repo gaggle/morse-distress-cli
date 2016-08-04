@@ -5,8 +5,8 @@ const morseify = require("./lib/morseify")
 const obfuscator = require("./lib/obfuscator")
 
 exports.processArgv = function (argv) {
-  var msg = argv._.join(" ") || fs.readFileSync(argv.file, "utf8")
-  var output = exports.convertText(msg, {obfuscate: argv.obfuscate})
+  const msg = argv._.join(" ") || fs.readFileSync(argv.file, "utf8")
+  const output = exports.convertText(msg, {obfuscate: argv.obfuscate})
   if (argv.write) {
     fs.writeFileSync(argv.write, output)
     console.log(`Wrote output to ${argv.write}`)
@@ -18,8 +18,8 @@ exports.processArgv = function (argv) {
 const DEFAULT_OPTS = {obfuscate: false, separators: {char: "|", word: "/"}}
 exports.convertText = function (message, opts) {
   opts = _.merge({}, DEFAULT_OPTS, opts)
-  var morsed = morseify(message)
-  var output = opts.obfuscate ? obfuscator(morsed) : morsed
+  const morsed = morseify(message)
+  const output = opts.obfuscate ? obfuscator(morsed) : morsed
 
   return _.reduce(output, function (result, value) {
     if (result.length == 0)
