@@ -35,35 +35,35 @@ describe("index", function () {
     })
 
     it("calls morseify", function () {
-      index.convert_text("foo")
+      index.convertText("foo")
       expect(morseify).to.have.been.calledWith("foo")
     })
 
     it("calls obfuscation", function () {
       morseify.returns(["...."])
-      index.convert_text("foo", {obfuscate: true})
+      index.convertText("foo", {obfuscate: true})
       expect(obfuscator).to.have.been.calledWith(["...."])
     })
 
     it("inserts pipe separator betwen letters by default", function() {
       morseify.returns(["....", "...."])
-      var res = index.convert_text()
+      var res = index.convertText()
       expect(res).to.eql("....|....")
     })
 
     it("replaces spaces between words with forward slash by default", function() {
       morseify.returns(["....", " ", "...."])
-      var res = index.convert_text()
+      var res = index.convertText()
       expect(res).to.eql("..../....")
     })
   })
 
   describe("#process_argv", function () {
-   var index, convert_text, logger
+   var index, convertText, logger
 
    beforeEach(function () {
      index = rewire("../index")
-     convert_text = sandbox.stub(index, "convert_text")
+     convertText = sandbox.stub(index, "convertText")
      logger = sandbox.spy(console, "log")
      mock_fs()
    })
@@ -73,30 +73,30 @@ describe("index", function () {
    })
 
    it("calls text converter", function () {
-     index.process_argv(with_args({_: ["foo", "bar"]}))
-     expect(convert_text).to.have.been.calledWith("foo bar")
+     index.processArgv(with_args({_: ["foo", "bar"]}))
+     expect(convertText).to.have.been.calledWith("foo bar")
    })
 
    it("reads input file if requested", function () {
      mock_fs({'input.txt': "secrets..."});
-     index.process_argv(with_args({file: "input.txt"}))
-     expect(convert_text).to.have.been.calledWith("secrets...")
+     index.processArgv(with_args({file: "input.txt"}))
+     expect(convertText).to.have.been.calledWith("secrets...")
    })
 
    it("reads obfuscation bool", function () {
-     index.process_argv(with_args({_: ["foo"], obfuscate: true}))
-     expect(convert_text).to.have.been.calledWith("foo", {obfuscate: true})
+     index.processArgv(with_args({_: ["foo"], obfuscate: true}))
+     expect(convertText).to.have.been.calledWith("foo", {obfuscate: true})
    })
 
    it("outputs result by default", function () {
-     convert_text.returns("output")
-     index.process_argv(with_args({_: ["foo"]}))
+     convertText.returns("output")
+     index.processArgv(with_args({_: ["foo"]}))
      expect(logger).to.have.been.calledWith("output")
    })
 
    it("can save result to a file", function () {
-     convert_text.returns("some output")
-     index.process_argv(with_args({_: ["foo"], write: "result.txt"}))
+     convertText.returns("some output")
+     index.processArgv(with_args({_: ["foo"], write: "result.txt"}))
      expect(fs.readFileSync("result.txt", "utf8")).to.eql("some output")
    })
   })

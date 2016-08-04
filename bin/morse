@@ -39,4 +39,4 @@ var argv = require("yargs")
   })
   .argv
 
-main.process_argv(argv)
+main.processArgv(argv)
