@@ -1,7 +1,6 @@
 "use strict";
 const chai = require("chai")
 const fs = require("fs")
-const _ = require("lodash")
 const mock_fs = require("mock-fs")
 const mockery = require("mockery")
 const rewire = require("rewire")
@@ -103,10 +102,11 @@ describe("index", () => {
 })
 
 const with_args = opts => {
-  return _.merge({
+  const defaults = {
     _: [],
     file: null,
     obfuscate: false,
     write: null
-  }, opts)
+  }
+  return Object.assign(defaults, opts)
 }
