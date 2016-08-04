@@ -10,23 +10,23 @@ const sinonChai = require("sinon-chai")
 const expect = chai.expect
 chai.use(sinonChai)
 
-describe("index", function () {
+describe("index", () => {
   let sandbox
 
-  beforeEach(function () {
+  beforeEach(() => {
     sandbox = sinon.sandbox.create()
     mockery.enable({warnOnUnregistered: false, useCleanCache: true})
   })
 
-  afterEach(function () {
+  afterEach(() => {
     mockery.deregisterAll();
     sandbox.restore()
   })
 
-  describe("#convert_text", function () {
+  describe("#convert_text", () => {
     let index, morseify, obfuscator
 
-    beforeEach(function () {
+    beforeEach(() => {
       morseify = sandbox.stub()
       mockery.registerMock("./lib/morseify", morseify)
       obfuscator = sandbox.stub()
@@ -34,79 +34,79 @@ describe("index", function () {
       index = rewire("../index")
     })
 
-    it("calls morseify", function () {
+    it("calls morseify", () => {
       index.convertText("foo")
       expect(morseify).to.have.been.calledWith("foo")
     })
 
-    it("calls obfuscation", function () {
+    it("calls obfuscation", () => {
       morseify.returns(["...."])
       index.convertText("foo", {obfuscate: true})
       expect(obfuscator).to.have.been.calledWith(["...."])
     })
 
-    it("inserts pipe separator betwen letters by default", function() {
+    it("inserts pipe separator betwen letters by default", () => {
       morseify.returns(["....", "...."])
       const res = index.convertText()
       expect(res).to.eql("....|....")
     })
 
-    it("replaces spaces between words with forward slash by default", function() {
+    it("replaces spaces between words with forward slash by default", () => {
       morseify.returns(["....", " ", "...."])
       const res = index.convertText()
       expect(res).to.eql("..../....")
     })
   })
 
-  describe("#process_argv", function () {
-   let index, convertText, logger
+  describe("#process_argv", () => {
+    let index, convertText, logger
 
-   beforeEach(function () {
-     index = rewire("../index")
-     convertText = sandbox.stub(index, "convertText")
-     logger = sandbox.spy(console, "log")
-     mock_fs()
-   })
+    beforeEach(() => {
+      index = rewire("../index")
+      convertText = sandbox.stub(index, "convertText")
+      logger = sandbox.spy(console, "log")
+      mock_fs()
+    })
 
-   afterEach(function () {
-     mock_fs.restore()
-   })
+    afterEach(() => {
+      mock_fs.restore()
+    })
 
-   it("calls text converter", function () {
-     index.processArgv(with_args({_: ["foo", "bar"]}))
-     expect(convertText).to.have.been.calledWith("foo bar")
-   })
+    it("calls text converter", () => {
+      index.processArgv(with_args({_: ["foo", "bar"]}))
+      expect(convertText).to.have.been.calledWith("foo bar")
+    })
 
-   it("reads input file if requested", function () {
-     mock_fs({'input.txt': "secrets..."});
-     index.processArgv(with_args({file: "input.txt"}))
-     expect(convertText).to.have.been.calledWith("secrets...")
-   })
+    it("reads input file if requested", () => {
+      mock_fs({'input.txt': "secrets..."});
+      index.processArgv(with_args({file: "input.txt"}))
+      expect(convertText).to.have.been.calledWith("secrets...")
+    })
 
-   it("reads obfuscation bool", function () {
-     index.processArgv(with_args({_: ["foo"], obfuscate: true}))
-     expect(convertText).to.have.been.calledWith("foo", {obfuscate: true})
-   })
+    it("reads obfuscation bool", () => {
+      index.processArgv(with_args({_: ["foo"], obfuscate: true}))
+      expect(convertText).to.have.been.calledWith("foo", {obfuscate: true})
+    })
 
-   it("outputs result by default", function () {
-     convertText.returns("output")
-     index.processArgv(with_args({_: ["foo"]}))
-     expect(logger).to.have.been.calledWith("output")
-   })
+    it("outputs result by default", () => {
+      convertText.returns("output")
+      index.processArgv(with_args({_: ["foo"]}))
+      expect(logger).to.have.been.calledWith("output")
+    })
 
-   it("can save result to a file", function () {
-     convertText.returns("some output")
-     index.processArgv(with_args({_: ["foo"], write: "result.txt"}))
-     expect(fs.readFileSync("result.txt", "utf8")).to.eql("some output")
-   })
+    it("can save result to a file", () => {
+      convertText.returns("some output")
+      index.processArgv(with_args({_: ["foo"], write: "result.txt"}))
+      expect(fs.readFileSync("result.txt", "utf8")).to.eql("some output")
+    })
   })
 })
 
-const with_args = function (opts) {
- return _.merge({
-   _: [],
-   file: null,
-   obfuscate: false,
-   write: null
- }, opts)
+const with_args = opts => {
+  return _.merge({
+    _: [],
+    file: null,
+    obfuscate: false,
+    write: null
+  }, opts)
 }

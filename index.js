@@ -4,7 +4,7 @@ const _ = require("lodash")
 const morseify = require("./lib/morseify")
 const obfuscator = require("./lib/obfuscator")
 
-exports.processArgv = function (argv) {
+exports.processArgv = argv => {
   const msg = argv._.join(" ") || fs.readFileSync(argv.file, "utf8")
   const output = exports.convertText(msg, {obfuscate: argv.obfuscate})
   if (argv.write) {
@@ -16,12 +16,12 @@ exports.processArgv = function (argv) {
 }
 
 const DEFAULT_OPTS = {obfuscate: false, separators: {char: "|", word: "/"}}
-exports.convertText = function (message, opts) {
+exports.convertText = (message, opts) => {
   opts = _.merge({}, DEFAULT_OPTS, opts)
   const morsed = morseify(message)
   const output = opts.obfuscate ? obfuscator(morsed) : morsed
 
-  return _.reduce(output, function (result, value) {
+  return _.reduce(output, (result, value) => {
     if (result.length == 0)
       result.push(value)
     else if (value == " ")

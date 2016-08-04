@@ -30,10 +30,10 @@ const argv = require("yargs")
   .help("h")
   .alias("h", "help")
   .strict()
-  .check(function (parsed, options) {
+  .check((parsed, options) => {
     if (!parsed._.length && !parsed.file)
       return "Must specify either non-argument text or use the --file option"
-    if(parsed._.length && parsed.file)
+    if (parsed._.length && parsed.file)
       return "Cannot specify both non-argument text and file option"
     return true
   })
