@@ -33,10 +33,11 @@ exports.convertText = (message, opts) => {
 }
 
 const converter = (value, prevVal, separators) => {
-  if (value === " ")
+  if (value === " ") {
     return [separators.word]
-  else if (value === "\n" || prevVal === "\n" || prevVal === separators.word)
+  } else if (value === "\n" || prevVal === "\n" || prevVal === separators.word) {
     return [value]
-  else
+  } else {
     return [separators.char, value]
+  }
 }
