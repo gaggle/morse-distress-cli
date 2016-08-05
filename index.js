@@ -1,8 +1,8 @@
 "use strict";
 const fs = require("fs")
-const _ = require("lodash")
 const morseify = require("./lib/morseify")
 const obfuscator = require("./lib/obfuscator")
+const utils = require("./lib/utils")
 
 const DEFAULT_CONVERTTEXT_OPTIONS = {obfuscate: false, separators: {char: "|", word: "/"}}
 
@@ -26,7 +26,7 @@ exports.convertText = (message, opts) => {
     if (result.length == 0) {
       result.push(value)
     } else {
-      result.push(...converter(value, _.last(result), opts.separators))
+      result.push(...converter(value, utils.last(result), opts.separators))
     }
     return result
   }, []).join("")
