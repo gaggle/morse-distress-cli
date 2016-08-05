@@ -23,17 +23,20 @@ exports.convertText = (message, opts) => {
   const output = opts.obfuscate ? obfuscator(morsed) : morsed
 
   return output.reduce((result, value) => {
-    if (result.length == 0)
+    if (result.length == 0) {
       result.push(value)
-    else {
-      const lastElement = _.last(result);
-      if (value == " ")
-        result.push(opts.separators.word)
-      else if (value == "\n" || lastElement == "\n" || lastElement == opts.separators.word)
-        result.push(value)
-      else
-        result.push(opts.separators.char, value)
+    } else {
+      result.push(...converter(value, _.last(result), opts.separators))
     }
     return result
   }, []).join("")
+}
+
+const converter = (value, prevVal, separators) => {
+  if (value == " ")
+    return [separators.word]
+  else if (value == "\n" || prevVal == "\n" || prevVal == separators.word)
+    return [value]
+  else
+    return [separators.char, value]
 }
