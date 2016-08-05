@@ -9,7 +9,7 @@
   "scripts": {
     "test": "mocha",
     "test:cov": "istanbul --include-all-sources cover _mocha --dir .coverage -- -R spec",
-    "test:ci": "istanbul --include-all-sources cover _mocha --dir .coverage --report lcovonly -- -R spec && cat ./.coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./.coverage"
+    "test:ci": "istanbul --include-all-sources cover _mocha --dir .coverage --report lcovonly -- -R spec && cat ./.coverage/lcov.info | tee >./node_modules/coveralls/bin/coveralls.js >./node_modules/.bin/codacy-coverage | rm -rf ./coverage"
   },
   "dependencies": {
     "lodash": "^4.14.0",
@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
+    "codacy-coverage": "^1.1.3",
     "coveralls": "^2.11.11",
     "istanbul": "^0.4.4",
     "mocha": "^2.5.3",
