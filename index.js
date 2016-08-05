@@ -6,7 +6,7 @@ const obfuscator = require("./lib/obfuscator")
 
 const DEFAULT_CONVERTTEXT_OPTIONS = {obfuscate: false, separators: {char: "|", word: "/"}}
 
-exports.processArgv = argv => {
+exports.processArgv = (argv) => {
   const msg = argv._.join(" ") || fs.readFileSync(argv.file, "utf8")
   const output = exports.convertText(msg, {obfuscate: argv.obfuscate})
   if (argv.write) {
