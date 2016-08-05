@@ -26,9 +26,9 @@ describe("index", () => {
     let index, morseify, obfuscator
 
     beforeEach(() => {
-      morseify = sandbox.stub().returns(['...'])
+      morseify = sandbox.stub().returns(["..."])
       mockery.registerMock("./lib/morseify", morseify)
-      obfuscator = sandbox.stub().returns(['3'])
+      obfuscator = sandbox.stub().returns(["3"])
       mockery.registerMock("./lib/obfuscator", obfuscator)
       index = rewire("../index")
     })
@@ -77,7 +77,7 @@ describe("index", () => {
     })
 
     it("reads input file if requested", () => {
-      mock_fs({'input.txt': "secrets..."});
+      mock_fs({"input.txt": "secrets..."});
       index.processArgv(with_args({file: "input.txt"}))
       expect(convertText).to.have.been.calledWith("secrets...")
     })
