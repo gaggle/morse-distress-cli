@@ -6,6 +6,18 @@ const utils = require("./lib/utils")
 
 const DEFAULT_CONVERTTEXT_OPTIONS = {obfuscate: false, separators: {char: "|", word: "/"}}
 
+const addPunctuation = (value, prevVal, wordSeparator, charSeparator) => {
+  charSeparator = charSeparator || ""
+  wordSeparator = wordSeparator || " "
+  if (value === " ") {
+    return [wordSeparator]
+  } else if (value === "\n" || prevVal === "\n" || prevVal === wordSeparator) {
+    return [value]
+  } else {
+    return [charSeparator, value]
+  }
+}
+
 exports.processArgv = (argv) => {
   const msg = argv._.join(" ") || fs.readFileSync(argv.file, "utf8")
   const output = exports.convertText(msg, {obfuscate: argv.obfuscate})
@@ -26,18 +38,8 @@ exports.convertText = (message, opts) => {
     if (result.length === 0) {
       result.push(value)
     } else {
-      result.push(...converter(value, utils.last(result), opts.separators))
+      result.push(...addPunctuation(value, utils.last(result), opts.separators.word, opts.separators.char))
     }
     return result
   }, []).join("")
-}
-
-const converter = (value, prevVal, separators) => {
-  if (value === " ") {
-    return [separators.word]
-  } else if (value === "\n" || prevVal === "\n" || prevVal === separators.word) {
-    return [value]
-  } else {
-    return [separators.char, value]
-  }
 }
