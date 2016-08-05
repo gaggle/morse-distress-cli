@@ -9,6 +9,16 @@ const sinonChai = require("sinon-chai")
 const expect = chai.expect
 chai.use(sinonChai)
 
+const withArgs = (opts) => {
+  const defaults = {
+    _: [],
+    file: null,
+    obfuscate: false,
+    write: null
+  }
+  return Object.assign(defaults, opts)
+}
+
 describe("index", () => {
   let sandbox
 
@@ -100,13 +110,3 @@ describe("index", () => {
     })
   })
 })
-
-const withArgs = (opts) => {
-  const defaults = {
-    _: [],
-    file: null,
-    obfuscate: false,
-    write: null
-  }
-  return Object.assign(defaults, opts)
-}
