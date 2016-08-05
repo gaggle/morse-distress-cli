@@ -1,7 +1,7 @@
 "use strict";
 const chai = require("chai")
 const fs = require("fs")
-const mock_fs = require("mock-fs")
+const mockFS = require("mock-fs")
 const mockery = require("mockery")
 const rewire = require("rewire")
 const sinon = require("sinon")
@@ -32,7 +32,7 @@ describe("index", () => {
     sandbox.restore()
   })
 
-  describe("#convert_text", () => {
+  describe("#convertText", () => {
     let index, morseify, obfuscator
 
     beforeEach(() => {
@@ -67,18 +67,18 @@ describe("index", () => {
     })
   })
 
-  describe("#process_argv", () => {
+  describe("#processArgv", () => {
     let index, convertText, logger
 
     beforeEach(() => {
       index = rewire("../index")
       convertText = sandbox.stub(index, "convertText")
       logger = sandbox.spy(console, "log")
-      mock_fs()
+      mockFS()
     })
 
     afterEach(() => {
-      mock_fs.restore()
+      mockFS.restore()
     })
 
     it("calls text converter", () => {
@@ -87,7 +87,7 @@ describe("index", () => {
     })
 
     it("reads input file if requested", () => {
-      mock_fs({"input.txt": "secrets..."});
+      mockFS({"input.txt": "secrets..."});
       index.processArgv(withArgs({file: "input.txt"}))
       expect(convertText).to.have.been.calledWith("secrets...")
     })
