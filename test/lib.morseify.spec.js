@@ -1,8 +1,9 @@
+"use strict";
 const expect = require("chai").expect
 const _ = require("lodash")
 const morseify = require("../lib/morseify")
 
-describe("morseify", function () {
+describe("morseify", () => {
   _.forEach({
     "A": ".-",
     "B": "-...",
@@ -42,19 +43,19 @@ describe("morseify", function () {
     "9": "----.",
     ".": ".-.-.-",
     ",": "--..--"
-  }, function (morse, char) {
-    it(`converts ${char} to ${morse}`, function () {
+  }, (morse, char) => {
+    it(`converts ${char} to ${morse}`, () => {
       expect(morseify(char))
         .to.eql([morse])
     })
   })
 
-  it("preserves spaces", function () {
+  it("preserves spaces", () => {
     expect(morseify("A A"))
       .to.eql([".-", " ", ".-"])
   })
 
-  it("preserves newlines", function () {
+  it("preserves newlines", () => {
     expect(morseify("A\nA"))
       .to.eql([".-", "\n", ".-"])
   })

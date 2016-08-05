@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-var main = require("../index")
+const main = require("../index")
 
-var argv = require("yargs")
+const argv = require("yargs")
   .usage("Usage: $0 [text] [options]")
   .example("$0 Laying an egg")
   .example("$0 -f secrets.txt --obfuscate")
@@ -30,13 +30,13 @@ var argv = require("yargs")
   .help("h")
   .alias("h", "help")
   .strict()
-  .check(function (parsed, options) {
+  .check((parsed, options) => {
     if (!parsed._.length && !parsed.file)
       return "Must specify either non-argument text or use the --file option"
-    if(parsed._.length && parsed.file)
+    if (parsed._.length && parsed.file)
       return "Cannot specify both non-argument text and file option"
     return true
   })
   .argv
 
-main.process_argv(argv)
+main.processArgv(argv)
