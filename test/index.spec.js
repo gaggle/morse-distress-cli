@@ -26,9 +26,9 @@ describe("index", () => {
     let index, morseify, obfuscator
 
     beforeEach(() => {
-      morseify = sandbox.stub()
+      morseify = sandbox.stub().returns(['...'])
       mockery.registerMock("./lib/morseify", morseify)
-      obfuscator = sandbox.stub()
+      obfuscator = sandbox.stub().returns(['3'])
       mockery.registerMock("./lib/obfuscator", obfuscator)
       index = rewire("../index")
     })
