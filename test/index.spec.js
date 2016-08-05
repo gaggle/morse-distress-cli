@@ -72,36 +72,36 @@ describe("index", () => {
     })
 
     it("calls text converter", () => {
-      index.processArgv(with_args({_: ["foo", "bar"]}))
+      index.processArgv(withArgs({_: ["foo", "bar"]}))
       expect(convertText).to.have.been.calledWith("foo bar")
     })
 
     it("reads input file if requested", () => {
       mock_fs({"input.txt": "secrets..."});
-      index.processArgv(with_args({file: "input.txt"}))
+      index.processArgv(withArgs({file: "input.txt"}))
       expect(convertText).to.have.been.calledWith("secrets...")
     })
 
     it("reads obfuscation bool", () => {
-      index.processArgv(with_args({_: ["foo"], obfuscate: true}))
+      index.processArgv(withArgs({_: ["foo"], obfuscate: true}))
       expect(convertText).to.have.been.calledWith("foo", {obfuscate: true})
     })
 
     it("outputs result by default", () => {
       convertText.returns("output")
-      index.processArgv(with_args({_: ["foo"]}))
+      index.processArgv(withArgs({_: ["foo"]}))
       expect(logger).to.have.been.calledWith("output")
     })
 
     it("can save result to a file", () => {
       convertText.returns("some output")
-      index.processArgv(with_args({_: ["foo"], write: "result.txt"}))
+      index.processArgv(withArgs({_: ["foo"], write: "result.txt"}))
       expect(fs.readFileSync("result.txt", "utf8")).to.eql("some output")
     })
   })
 })
 
-const with_args = opts => {
+const withArgs = (opts) => {
   const defaults = {
     _: [],
     file: null,
