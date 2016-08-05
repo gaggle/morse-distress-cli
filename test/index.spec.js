@@ -28,7 +28,7 @@ describe("index", () => {
   })
 
   afterEach(() => {
-    mockery.deregisterAll();
+    mockery.deregisterAll()
     sandbox.restore()
   })
 
@@ -87,7 +87,7 @@ describe("index", () => {
     })
 
     it("reads input file if requested", () => {
-      mockFS({"input.txt": "secrets..."});
+      mockFS({"input.txt": "secrets..."})
       index.processArgv(withArgs({file: "input.txt"}))
       expect(convertText).to.have.been.calledWith("secrets...")
     })
